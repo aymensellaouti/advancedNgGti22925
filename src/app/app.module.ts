@@ -57,6 +57,7 @@ import { FakeCvService } from "./cv/services/fake-cv.service";
 import { LOGGER_TOKEN } from "./injection tokens/logger.injection-token";
 import { Logger2Service } from "./services/logger2.service";
 import { Logger3Service } from "./services/logger3.service";
+import { WeekTodoComponent } from './todo/week-todo/week-todo.component';
 
 @NgModule({
   declarations: [
@@ -97,6 +98,7 @@ import { Logger3Service } from "./services/logger3.service";
     RhComponent,
     UserListComponent,
     ProductsComponent,
+    WeekTodoComponent,
   ],
   imports: [
     BrowserModule,

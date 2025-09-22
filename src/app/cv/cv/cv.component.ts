@@ -4,6 +4,7 @@ import { LoggerService } from "../../services/logger.service";
 import { ToastrService } from "ngx-toastr";
 import { CvService } from "../services/cv.service";
 import { EMPTY, Observable, catchError, of } from "rxjs";
+import { TodoService } from "../../todo/service/todo.service";
 @Component({
   selector: "app-cv",
   templateUrl: "./cv.component.html",
@@ -18,7 +19,8 @@ export class CvComponent {
   constructor(
     private logger: LoggerService,
     private toastr: ToastrService,
-    private cvService: CvService
+    private cvService: CvService,
+    private todoService: TodoService
   ) {
     this.cvService.getCvs().subscribe({
       next: (cvs) => {
