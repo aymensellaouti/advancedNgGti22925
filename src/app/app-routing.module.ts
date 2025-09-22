@@ -18,10 +18,15 @@ const routes: Route[] = [
   { path: "rh", component: RhComponent },
   {
     path: "cv",
-    component: CvComponent,
+    children: [
+      {
+        path: "",
+        component: CvComponent,
+      },
+      { path: "add", component: AddCvComponent, canActivate: [AuthGuard] },
+      { path: ":id", component: DetailsCvComponent },
+    ],
   },
-  { path: "cv/add", component: AddCvComponent, canActivate: [AuthGuard] },
-  { path: "cv/:id", component: DetailsCvComponent },
   {
     path: "",
     component: FrontComponent,

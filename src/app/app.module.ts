@@ -57,8 +57,11 @@ import { FakeCvService } from "./cv/services/fake-cv.service";
 import { LOGGER_TOKEN } from "./injection tokens/logger.injection-token";
 import { Logger2Service } from "./services/logger2.service";
 import { Logger3Service } from "./services/logger3.service";
-import { WeekTodoComponent } from './todo/week-todo/week-todo.component';
+import { WeekTodoComponent } from "./todo/week-todo/week-todo.component";
 
+import { v4 as uuidV4 } from "uuid";
+import { UUID_TOKEN } from "./injection tokens/uuid.injection-token";
+import { MasterDetailsComponent } from './cv/master-details/master-details.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -99,6 +102,7 @@ import { WeekTodoComponent } from './todo/week-todo/week-todo.component';
     UserListComponent,
     ProductsComponent,
     WeekTodoComponent,
+    MasterDetailsComponent,
   ],
   imports: [
     BrowserModule,
@@ -136,6 +140,10 @@ import { WeekTodoComponent } from './todo/week-todo/week-todo.component';
       provide: LOGGER_TOKEN,
       useClass: Logger3Service,
       multi: true,
+    },
+    {
+      provide: UUID_TOKEN,
+      useValue: uuidV4,
     },
   ],
   bootstrap: [AppComponent],
