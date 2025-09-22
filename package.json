@@ -19,17 +19,19 @@
     "@angular/platform-browser-dynamic": "^16.0.0",
     "@angular/router": "^16.0.0",
     "@angular/service-worker": "^16.0.0",
+    "@faker-js/faker": "^7.6.0",
+    "@types/uuid": "^10.0.0",
     "bootstrap": "^5.2.3",
+    "chart.js": "^4.0.1",
     "font-awesome": "^4.7.0",
     "jasmine-auto-spies": "^8.0.1",
     "memo-decorator": "^2.0.1",
     "ngx-toastr": "^16.0.2",
+    "plotly.js-dist-min": "^2.6.2",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
-    "zone.js": "~0.13.0",
-    "@faker-js/faker": "^7.6.0",
-    "chart.js": "^4.0.1",
-    "plotly.js-dist-min": "^2.6.2"
+    "uuid": "^13.0.0",
+    "zone.js": "~0.13.0"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^16.0.0",
