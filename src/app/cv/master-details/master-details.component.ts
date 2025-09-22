@@ -1,7 +1,8 @@
-import { Component } from "@angular/core";
+import { Component, inject } from "@angular/core";
 import { ToastrService } from "ngx-toastr";
 import { Cv } from "../model/cv";
 import { CvService } from "../services/cv.service";
+import { ActivatedRoute, Router } from "@angular/router";
 
 @Component({
   selector: "app-master-details",
@@ -10,6 +11,8 @@ import { CvService } from "../services/cv.service";
 })
 export class MasterDetailsComponent {
   cvs: Cv[] = [];
+  router = inject(Router);
+  activatedRouted = inject(ActivatedRoute);
 
   constructor(private toastr: ToastrService, private cvService: CvService) {
     this.cvService.getCvs().subscribe({
@@ -22,6 +25,11 @@ export class MasterDetailsComponent {
           Attention!! Les données sont fictives, problème avec le serveur.
           Veuillez contacter l'admin.`);
       },
+    });
+  }
+  onSelectCv(cv: Cv) {
+    this.router.navigate([cv.id], {
+      relativeTo: this.activatedRouted,
     });
   }
 }

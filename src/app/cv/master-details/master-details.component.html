@@ -1,1 +1,2 @@
-<app-list [cvs]="cvs" /> <router-outlet />
+<app-list (forwardCv)="onSelectCv($event)" [cvs]="cvs" />
+<router-outlet />
