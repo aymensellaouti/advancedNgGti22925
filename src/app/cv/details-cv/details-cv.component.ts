@@ -5,18 +5,18 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { ToastrService } from "ngx-toastr";
 import { APP_ROUTES } from "../../../config/routes.config";
 import { AuthService } from "../../auth/services/auth.service";
-import { Observable } from "rxjs";
+import { Observable, switchMap } from "rxjs";
 
 @Component({
   selector: "app-details-cv",
   templateUrl: "./details-cv.component.html",
   styleUrls: ["./details-cv.component.css"],
 })
-export class DetailsCvComponent implements OnInit {
-  // cv$: Observable<Cv> = this.cvService.getCvById(
+export class DetailsCvComponent {
+  //= this.cvService.getCvById(
   //   this.activatedRoute.snapshot.params["id"]
   // );
-  cv: Cv | null = null;
+  // cv: Cv | null = null;
   constructor(
     private cvService: CvService,
     private router: Router,
@@ -24,19 +24,22 @@ export class DetailsCvComponent implements OnInit {
     private toastr: ToastrService,
     public authService: AuthService
   ) {}
+  cv$: Observable<Cv> = this.activatedRoute.params.pipe(
+    switchMap((params) => this.cvService.getCvById(+params["id"]))
+  );
 
-  ngOnInit() {
-    const id = this.activatedRoute.params.subscribe((params) => {
-      this.cvService.getCvById(+params["id"]).subscribe({
-        next: (cv) => {
-          this.cv = cv;
-        },
-        error: (e) => {
-          this.router.navigate([APP_ROUTES.cv]);
-        },
-      });
-    });
-  }
+  // ngOnInit() {
+  //   // const id = this.activatedRoute.params.subscribe((params) => {
+  //   //   this.cvService.getCvById(+params["id"]).subscribe({
+  //   //     next: (cv) => {
+  //   //       this.cv = cv;
+  //   //     },
+  //   //     error: (e) => {
+  //   //       this.router.navigate([APP_ROUTES.cv]);
+  //   //     },
+  //   //   });
+  //   // });
+  // }
   deleteCv(cv: Cv) {
     this.cvService.deleteCvById(cv.id).subscribe({
       next: () => {
