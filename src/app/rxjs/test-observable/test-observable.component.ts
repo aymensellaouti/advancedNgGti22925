@@ -9,7 +9,7 @@ import { ToastrService } from "ngx-toastr";
 })
 export class TestObservableComponent {
   firstObservable$: Observable<number>;
-
+  counter = 5;
   constructor(private toaster: ToastrService) {
     this.firstObservable$ = new Observable((observer) => {
       let i = 5;
@@ -22,5 +22,23 @@ export class TestObservableComponent {
         }
       }, 1000);
     });
+
+    this.firstObservable$.subscribe({
+      next: (data) => {
+        console.log(data);
+        this.counter = data;
+      },
+    });
+
+    setTimeout(() => {
+      this.firstObservable$.subscribe({
+        next: (data) => {
+          this.toaster.info("" + data);
+        },
+        complete: () => {
+          this.toaster.error("BOOOOOM");
+        },
+      });
+    }, 3000);
   }
 }

@@ -63,6 +63,7 @@ import { v4 as uuidV4 } from "uuid";
 import { UUID_TOKEN } from "./injection tokens/uuid.injection-token";
 import { MasterDetailsComponent } from "./cv/master-details/master-details.component";
 import { NgxUiLoaderModule } from "ngx-ui-loader";
+import { FromOfComponent } from "./rxjs/from-of/from-of.component";
 @NgModule({
   declarations: [
     AppComponent,
@@ -104,6 +105,7 @@ import { NgxUiLoaderModule } from "ngx-ui-loader";
     ProductsComponent,
     WeekTodoComponent,
     MasterDetailsComponent,
+    FromOfComponent,
   ],
   imports: [
     BrowserModule,
