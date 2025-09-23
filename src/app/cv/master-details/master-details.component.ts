@@ -15,6 +15,9 @@ export class MasterDetailsComponent {
   cvs: Cv[] = this.activatedRouted.snapshot.data["cvs"];
 
   constructor(private toastr: ToastrService, private cvService: CvService) {
+    this.cvService.selectedCV$.subscribe({
+      next: (cv) => this.onSelectCv(cv),
+    });
     // this.cvService.getCvs().subscribe({
     //   next: (cvs) => {
     //     this.cvs = cvs;

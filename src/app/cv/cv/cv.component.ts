@@ -23,7 +23,7 @@ export class CvComponent {
       return of(this.cvService.getFakeCvs());
     })
   );
-  selectedCv: Cv | null = null;
+  selectedCv$: Observable<Cv> = this.cvService.selectedCV$;
   /*   selectedCv: Cv | null = null; */
   date = new Date();
 
@@ -46,8 +46,5 @@ export class CvComponent {
     // });
     this.logger.logger("je suis le cvComponent");
     this.toastr.info("Bienvenu dans notre CvTech");
-  }
-  onForwardCv(cv: Cv) {
-    this.selectedCv = cv;
   }
 }
