@@ -13,9 +13,10 @@ import { Observable } from "rxjs";
   styleUrls: ["./details-cv.component.css"],
 })
 export class DetailsCvComponent implements OnInit {
-  cv$: Observable<Cv> = this.cvService.getCvById(
-    this.activatedRoute.snapshot.params["id"]
-  );
+  // cv$: Observable<Cv> = this.cvService.getCvById(
+  //   this.activatedRoute.snapshot.params["id"]
+  // );
+  cv: Cv | null = null;
   constructor(
     private cvService: CvService,
     private router: Router,
@@ -25,21 +26,16 @@ export class DetailsCvComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    // this.cvService
-    //   .getCvById(this.activatedRoute.snapshot.params["id"])
-    //   .subscribe({
-    //     next: (cv) => (this.cv = cv),
-    //   });
-    // const id = this.activatedRoute.params.subscribe((params) => {
-    //   this.cvService.getCvById(+params["id"]).subscribe({
-    //     next: (cv) => {
-    //       this.cv = cv;
-    //     },
-    //     error: (e) => {
-    //       this.router.navigate([APP_ROUTES.cv]);
-    //     },
-    //   });
-    // });
+    const id = this.activatedRoute.params.subscribe((params) => {
+      this.cvService.getCvById(+params["id"]).subscribe({
+        next: (cv) => {
+          this.cv = cv;
+        },
+        error: (e) => {
+          this.router.navigate([APP_ROUTES.cv]);
+        },
+      });
+    });
   }
   deleteCv(cv: Cv) {
     this.cvService.deleteCvById(cv.id).subscribe({
