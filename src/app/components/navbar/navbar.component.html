@@ -5,7 +5,7 @@
       [routerLink]="['']"
       [routerLinkActiveOptions]="{ exact: true }"
       routerLinkActive="active text-primary"
-      >cvStartingAdvProject</a
+      >Connected as {{ (authService.user$ | async)?.email ?? "annonyme" }}</a
     >
     <button
       class="navbar-toggler"
@@ -65,6 +65,12 @@
           [routerLink]="['admin', 'color']"
           routerLinkActive="active text-primary"
           >Color</a
+        >
+        <a
+          class="nav-link"
+          [routerLink]="['products']"
+          routerLinkActive="active text-primary"
+          >Products</a
         >
         <a
           class="nav-link"
