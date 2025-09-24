@@ -11,8 +11,11 @@ import { CvService } from "../services/cv.service";
 export class AutocompleteComponent {
   formBuilder = inject(FormBuilder);
   cvService = inject(CvService);
+  form = this.formBuilder.group({ search: [""] });
+  constructor() {
+    this.search.valueChanges;
+  }
   get search(): AbstractControl {
     return this.form.get("search")!;
   }
-  form = this.formBuilder.group({ search: [""] });
 }
