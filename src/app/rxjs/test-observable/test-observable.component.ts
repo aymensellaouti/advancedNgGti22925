@@ -7,9 +7,10 @@ import { ToastrService } from "ngx-toastr";
   templateUrl: "./test-observable.component.html",
   styleUrls: ["./test-observable.component.css"],
 })
-export class TestObservableComponent {
+export class TestObservableComponent implements OnDestroy {
   firstObservable$: Observable<number>;
   counter = 5;
+  subscribtions = new Subscription();
   constructor(private toaster: ToastrService) {
     this.firstObservable$ = new Observable((observer) => {
       let i = 5;
@@ -22,15 +23,17 @@ export class TestObservableComponent {
         }
       }, 1000);
     });
+    this.subscribtions.add(
+      this.firstObservable$.subscribe({
+        next: (data) => {
+          console.log(data);
+          this.counter = data;
+        },
+      })
+    );
 
-    this.firstObservable$.subscribe({
-      next: (data) => {
-        console.log(data);
-        this.counter = data;
-      },
-    });
-
-    setTimeout(() => {
+    // setTimeout(() => {
+    this.subscribtions.add(
       this.firstObservable$.subscribe({
         next: (data) => {
           this.toaster.info("" + data);
@@ -38,7 +41,11 @@ export class TestObservableComponent {
         complete: () => {
           this.toaster.error("BOOOOOM");
         },
-      });
-    }, 3000);
+      })
+    );
+    // }, 3000);
+  }
+  ngOnDestroy(): void {
+    this.subscribtions.unsubscribe();
   }
 }
