@@ -22,7 +22,14 @@ export class AddCvComponent {
   cvService = inject(CvService);
   router = inject(Router);
   toastr = inject(ToastrService);
-
+  constructor() {
+    this.age.valueChanges.subscribe({
+      next: (age) => {
+        if (age < 18) this.path?.disable();
+        else this.path?.enable();
+      },
+    });
+  }
   form = this.formBuilder.group(
     {
       name: ["", Validators.required],
@@ -40,6 +47,7 @@ export class AddCvComponent {
         0,
         {
           validators: [Validators.required],
+          updateOn: "blur",
         },
       ],
     },
@@ -50,7 +58,7 @@ export class AddCvComponent {
   );
 
   addCv() {
-    this.cvService.addCv(this.form.value as Cv).subscribe({
+    this.cvService.addCv(this.form.getRawValue() as Cv).subscribe({
       next: () => {
         this.toastr.success(`Le cv a été ajouté avec succès`);
         this.router.navigate([APP_ROUTES.cv]);
