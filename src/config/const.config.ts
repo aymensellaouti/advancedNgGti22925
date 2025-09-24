@@ -3,4 +3,5 @@ export const CONSTANTES = {
   env: "dev",
   token: "token",
   connectedUser: "connectedUser",
+  savedAddForm: "savedAddForm",
 };

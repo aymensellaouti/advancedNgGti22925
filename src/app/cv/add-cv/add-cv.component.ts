@@ -1,4 +1,4 @@
-import { Component, inject } from "@angular/core";
+import { Component, inject, OnDestroy } from "@angular/core";
 import {
   AbstractControl,
   FormBuilder,
@@ -11,13 +11,15 @@ import { Router } from "@angular/router";
 import { ToastrService } from "ngx-toastr";
 import { APP_ROUTES } from "src/config/routes.config";
 import { Cv } from "../model/cv";
+import { CONSTANTES } from "../../../config/const.config";
+import { filter, tap } from "rxjs";
 
 @Component({
   selector: "app-add-cv",
   templateUrl: "./add-cv.component.html",
   styleUrls: ["./add-cv.component.css"],
 })
-export class AddCvComponent {
+export class AddCvComponent implements OnDestroy {
   formBuilder = inject(FormBuilder);
   cvService = inject(CvService);
   router = inject(Router);
@@ -29,6 +31,21 @@ export class AddCvComponent {
         else this.path?.enable();
       },
     });
+    // this.form.statusChanges
+    //   .pipe(
+    //     filter(() => this.form.valid),
+    //     tap(() => {
+    //       localStorage.setItem(
+    //         CONSTANTES.savedAddForm,
+    //         JSON.stringify(this.form.value)
+    //       );
+    //     })
+    //   )
+    //   .subscribe();
+    const savedForm = localStorage.getItem(CONSTANTES.savedAddForm);
+    if (savedForm) {
+      this.form.patchValue(JSON.parse(savedForm));
+    }
   }
   form = this.formBuilder.group(
     {
@@ -61,6 +78,8 @@ export class AddCvComponent {
     this.cvService.addCv(this.form.getRawValue() as Cv).subscribe({
       next: () => {
         this.toastr.success(`Le cv a été ajouté avec succès`);
+        localStorage.removeItem(CONSTANTES.savedAddForm);
+        this.form.reset();
         this.router.navigate([APP_ROUTES.cv]);
       },
       error: (erreur) => {
@@ -70,6 +89,14 @@ export class AddCvComponent {
         );
       },
     });
+  }
+  ngOnDestroy(): void {
+    if (this.form.valid) {
+      localStorage.setItem(
+        CONSTANTES.savedAddForm,
+        JSON.stringify(this.form.value)
+      );
+    }
   }
 
   get name(): AbstractControl {
