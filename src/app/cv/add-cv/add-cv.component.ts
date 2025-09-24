@@ -2,6 +2,7 @@ import { Component, inject } from "@angular/core";
 import {
   AbstractControl,
   FormBuilder,
+  FormGroup,
   NgForm,
   Validators,
 } from "@angular/forms";
@@ -27,7 +28,7 @@ export class AddCvComponent {
       name: ["", Validators.required],
       firstname: ["", Validators.required],
       path: [""],
-      job: ["", Validators.required],
+      job: ["", [Validators.required], []],
       cin: [
         "",
         {
@@ -48,8 +49,8 @@ export class AddCvComponent {
     }
   );
 
-  addCv(cv: Cv) {
-    this.cvService.addCv(cv).subscribe({
+  addCv() {
+    this.cvService.addCv(this.form.value as Cv).subscribe({
       next: () => {
         this.toastr.success(`Le cv a été ajouté avec succès`);
         this.router.navigate([APP_ROUTES.cv]);
