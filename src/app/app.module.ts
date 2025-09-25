@@ -49,6 +49,10 @@ import { v4 as uuidV4 } from "uuid";
 import { UUID_TOKEN } from "./injection tokens/uuid.injection-token";
 import { NgxUiLoaderModule } from "ngx-ui-loader";
 import { FromOfComponent } from "./rxjs/from-of/from-of.component";
+import { CdComponent } from './cd/cd/cd.component';
+import { CdFilsComponent } from './cd/cd-fils/cd-fils.component';
+import { UserListElementsComponent } from './optimizationPattern/user-list-elements/user-list-elements.component';
+import { FiboPipe } from './pipes/fibo.pipe';
 
 @NgModule({
   declarations: [
@@ -78,6 +82,10 @@ import { FromOfComponent } from "./rxjs/from-of/from-of.component";
     UserListComponent,
     ProductsComponent,
     FromOfComponent,
+    CdComponent,
+    CdFilsComponent,
+    UserListElementsComponent,
+    FiboPipe,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,12 @@
+<p>cd works!</p>
+
+<input
+  type="text"
+  #emailInput
+  (keyup)="changeUser(emailInput.value)"
+  class="form-control"
+/>
+<input type="text" [(ngModel)]="name" class="form-control" />
+<div class="alert alert-danger">
+  <app-cd-fils [user]="user" [name]="name" />
+</div>
