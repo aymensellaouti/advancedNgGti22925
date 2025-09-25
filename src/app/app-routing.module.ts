@@ -22,28 +22,8 @@ const routes: Route[] = [
   { path: "rh", component: RhComponent },
   { path: "products", component: ProductsComponent },
   {
-    path: "cv",
-    children: [
-      {
-        path: "",
-        component: CvComponent,
-      },
-      { path: "add", component: AddCvComponent, canActivate: [authGuard] },
-      {
-        path: "list",
-        component: MasterDetailsComponent,
-        resolve: {
-          cvs: cvsResolver,
-        },
-        children: [
-          {
-            path: ":id",
-            component: DetailsCvComponent,
-          },
-        ],
-      },
-      { path: ":id", component: DetailsCvComponent },
-    ],
+    path: "todo",
+    loadChildren: () => import("./todo/todo.module"),
   },
   {
     path: "",

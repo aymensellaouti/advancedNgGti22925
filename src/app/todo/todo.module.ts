@@ -10,4 +10,4 @@ import { TodoRoutingModule } from "./todo-routing.module";
   declarations: [TodoComponent, WeekTodoComponent],
   imports: [FormsModule, CommonModule, TodoRoutingModule],
 })
-export class TodoModule {}
+export default class TodoModule {}
