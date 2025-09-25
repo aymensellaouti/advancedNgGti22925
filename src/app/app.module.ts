@@ -50,7 +50,6 @@ import { UUID_TOKEN } from "./injection tokens/uuid.injection-token";
 import { NgxUiLoaderModule } from "ngx-ui-loader";
 import { FromOfComponent } from "./rxjs/from-of/from-of.component";
 
-import { CvModule } from "./cv/cv.module";
 @NgModule({
   declarations: [
     AppComponent,
@@ -85,7 +84,6 @@ import { CvModule } from "./cv/cv.module";
     FormsModule,
     BrowserAnimationsModule, // required animations module
     ToastrModule.forRoot(), // ToastrModule added
-    CvModule,
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,

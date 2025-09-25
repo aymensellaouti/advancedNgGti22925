@@ -9,29 +9,24 @@ import { MasterDetailsComponent } from "./master-details/master-details.componen
 
 export const CV_ROUTES = [
   {
-    path: "cv",
+    path: "",
+    component: CvComponent,
+  },
+  { path: "add", component: AddCvComponent, canActivate: [authGuard] },
+  {
+    path: "list",
+    component: MasterDetailsComponent,
+    resolve: {
+      cvs: cvsResolver,
+    },
     children: [
       {
-        path: "",
-        component: CvComponent,
+        path: ":id",
+        component: DetailsCvComponent,
       },
-      { path: "add", component: AddCvComponent, canActivate: [authGuard] },
-      {
-        path: "list",
-        component: MasterDetailsComponent,
-        resolve: {
-          cvs: cvsResolver,
-        },
-        children: [
-          {
-            path: ":id",
-            component: DetailsCvComponent,
-          },
-        ],
-      },
-      { path: ":id", component: DetailsCvComponent },
     ],
   },
+  { path: ":id", component: DetailsCvComponent },
 ];
 
 @NgModule({

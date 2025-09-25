@@ -1,5 +1,5 @@
 import { NgModule } from "@angular/core";
-import { RouterModule, Route } from "@angular/router";
+import { RouterModule, Route, PreloadAllModules } from "@angular/router";
 import { TodoComponent } from "./todo/todo/todo.component";
 import { MiniWordComponent } from "./directives/mini-word/mini-word.component";
 import { ColorComponent } from "./components/color/color.component";
@@ -16,6 +16,7 @@ import { MasterDetailsComponent } from "./cv/master-details/master-details.compo
 import { cvsResolver } from "./cv/cvs.resolver";
 import { canLeaveGuard } from "./guards/can-leave.guard";
 import { ProductsComponent } from "./products/products.component";
+import { CustomPreloadingStrategy } from "./preloading startegies/custom.preloading-strategy";
 
 const routes: Route[] = [
   { path: "login", component: LoginComponent },
@@ -24,6 +25,13 @@ const routes: Route[] = [
   {
     path: "todo",
     loadChildren: () => import("./todo/todo.module"),
+  },
+  {
+    path: "cv",
+    data: {
+      preload: true,
+    },
+    loadChildren: () => import("./cv/cv.module"),
   },
   {
     path: "",
@@ -39,7 +47,12 @@ const routes: Route[] = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [
+    RouterModule.forRoot(routes, {
+      preloadingStrategy: CustomPreloadingStrategy,
+      //preloadingStrategy: PreloadAllModules,
+    }),
+  ],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}
