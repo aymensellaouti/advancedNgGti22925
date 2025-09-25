@@ -6,10 +6,22 @@
   <input type="text" class="form-control" formControlName="age" /> Cin:
   <input type="text" class="form-control" formControlName="cin" />
 
+  <div
+    *ngIf="cin.errors && cin.hasError('uniqueCin')"
+    class="alert alert-danger"
+  >
+    {{ cin.errors["uniqueCin"] }}
+  </div>
   Job: <input type="text" class="form-control" formControlName="job" /> Path:
   <input type="text" class="form-control" formControlName="path" />
 
   <button [disabled]="form.invalid" class="btn btn-primary" (click)="addCv()">
     add cv
   </button>
+  <div
+    *ngIf="form.errors && form.hasError('ageCin')"
+    class="alert alert-danger"
+  >
+    {{ form.errors["ageCin"] }}
+  </div>
 </form>

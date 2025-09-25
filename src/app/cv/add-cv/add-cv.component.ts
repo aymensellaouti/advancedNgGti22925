@@ -13,6 +13,8 @@ import { APP_ROUTES } from "src/config/routes.config";
 import { Cv } from "../model/cv";
 import { CONSTANTES } from "../../../config/const.config";
 import { filter, tap } from "rxjs";
+import { uniqueCinValidator } from "../../validators/unique-cin.async-validator";
+import { ageCin } from "../../validators/age-cin.validator";
 
 @Component({
   selector: "app-add-cv",
@@ -56,8 +58,9 @@ export class AddCvComponent implements OnDestroy {
       cin: [
         "",
         {
-          validators: [Validators.required, Validators.pattern("[0-9]{8}")],
-          asyncValidators: [],
+          validators: [Validators.required],
+          asyncValidators: [uniqueCinValidator(this.cvService)],
+          updateOn: "blur",
         },
       ],
       age: [
@@ -69,7 +72,7 @@ export class AddCvComponent implements OnDestroy {
       ],
     },
     {
-      validators: [],
+      validators: [ageCin],
       asyncValidators: [],
     }
   );
