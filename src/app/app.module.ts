@@ -72,6 +72,7 @@ import { TodoModule } from "./todo/todo.module";
     CardProfilComponent,
     PereComponent,
     FilsComponent,
+    // Cv
     AddCvComponent,
     CvComponent,
     ListComponent,
@@ -82,6 +83,8 @@ import { TodoModule } from "./todo/todo.module";
     EmbaucheComponent,
     DefaultImagePipe,
     AutocompleteComponent,
+    MasterDetailsComponent,
+    // End Cv
     NgstyleComponent,
     MiniWordComponent,
     NgclassComponent,
@@ -100,7 +103,6 @@ import { TodoModule } from "./todo/todo.module";
     RhComponent,
     UserListComponent,
     ProductsComponent,
-    MasterDetailsComponent,
     FromOfComponent,
   ],
   imports: [
